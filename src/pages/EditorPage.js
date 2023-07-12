@@ -132,7 +132,7 @@ const EditorPage = () => {
                             <option value="Python">Python3</option>
                         </select>
                     </div>
-                    <div className="col-sm-2 w-25" style={{ marginLeft: "50%"}}>
+                    <div className="col-sm-2 w-25" style={{ marginLeft: "37%"}}>
                         <label className="visually-hidden" htmlFor="specificThemeSelect">Preference</label>
                         <select className="form-select" id="specificThemeSelect">
                             <option >Choose Theme</option>
