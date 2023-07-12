@@ -129,7 +129,7 @@ const EditorPage = () => {
                             <option value="C">C</option>
                             <option value="Cpp">C++</option>
                             <option value="Java">Java</option>
-                            <option value="Python">Python</option>
+                            <option value="Python">Python3</option>
                         </select>
                     </div>
                     <div className="col-sm-2 w-25" style={{ marginLeft: "37%"}}>
