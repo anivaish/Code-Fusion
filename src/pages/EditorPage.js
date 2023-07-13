@@ -94,74 +94,76 @@ const EditorPage = () => {
 
     return (
         <div className="mainWrap">
-            <div className="aside" >
-                <div className="asideInner">
-                    <div className="logo">
-                        <img
-                            className="logoImage"
-                            src="/Code Fusion.png"
-                            alt="logo"
-                        />
-                    </div>
-                    <h3 className='h5 mt-2 mb-2'>Connected</h3>
-                    <div className="clientsList">
-                        {clients.map((client) => (
-                            <Client
-                                key={client.socketId}
-                                username={client.username}
+            <div className='secWrap'>
+                <div className="aside" >
+                    <div className="asideInner">
+                        <div className="logo">
+                            <img
+                                className="logoImage"
+                                src="/Code Fusion.png"
+                                alt="logo"
                             />
-                        ))}
+                        </div>
+                        <h3 className='h5 mt-2 mb-2'>Connected</h3>
+                        <div className="clientsList">
+                            {clients.map((client) => (
+                                <Client
+                                    key={client.socketId}
+                                    username={client.username}
+                                />
+                            ))}
+                        </div>
                     </div>
+                    <button className="btnn" onClick={copyRoomId}>
+                        Copy ROOM ID
+                    </button>
+                    <button className="btnn leaveBtnn" onClick={leaveRoom}>
+                        Leave
+                    </button>
                 </div>
-                <button className="btnn" onClick={copyRoomId}>
-                    Copy ROOM ID
-                </button>
-                <button className="btnn leaveBtnn" onClick={leaveRoom}>
-                    Leave
-                </button>
-            </div>
-            <div className="editorWrap">
-                <div className='d-flex justify-content-between m-2'>
-                    <div className="col-sm-3 w-25" >
-                        <label className="visually-hidden" htmlFor="specificSizeSelect">Preference</label>
-                        <select className="form-select" id="specificSizeSelect">
-                            <option value="default">Choose Language</option>
-                            <option value="C">C</option>
-                            <option value="Cpp">C++</option>
-                            <option value="Java">Java</option>
-                            <option value="Python">Python3</option>
-                        </select>
+                <div className="editorWrap">
+                    <div className='d-flex justify-content-between m-2'>
+                        <div className="col-sm-3 w-25" >
+                            <label className="visually-hidden" htmlFor="specificSizeSelect">Preference</label>
+                            <select className="form-select" id="specificSizeSelect">
+                                <option value="default">Choose Language</option>
+                                <option value="C">C</option>
+                                <option value="Cpp">C++</option>
+                                <option value="Java">Java</option>
+                                <option value="Python">Python3</option>
+                            </select>
+                        </div>
+                        <div className="col-sm-2 w-25" style={{ marginLeft: "37%" }}>
+                            <label className="visually-hidden" htmlFor="specificThemeSelect">Preference</label>
+                            <select className="form-select" id="specificThemeSelect">
+                                <option >Choose Theme</option>
+                                <option value="1">Eclipse</option>
+                                <option value="2">Light</option>
+                                <option value="3">Mid-Night</option>
+                                <option value="4">Ruby-Blue</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button" id='run' className='btn btn-success'>Run Code</button>
+                        </div>
                     </div>
-                    <div className="col-sm-2 w-25" style={{ marginLeft: "37%"}}>
-                        <label className="visually-hidden" htmlFor="specificThemeSelect">Preference</label>
-                        <select className="form-select" id="specificThemeSelect">
-                            <option >Choose Theme</option>
-                            <option value="1">Eclipse</option>
-                            <option value="2">Light</option>
-                            <option value="3">Mid-Night</option>
-                            <option value="4">Ruby-Blue</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button type="button" id='run' className='btn btn-success'>Run Code</button>
-                    </div>
+                    <Editor
+                        socketRef={socketRef}
+                        roomId={roomId}
+                        onCodeChange={(code) => {
+                            codeRef.current = code;
+                        }}
+                    />
                 </div>
-                <Editor
-                    socketRef={socketRef}
-                    roomId={roomId}
-                    onCodeChange={(code) => {
-                        codeRef.current = code;
-                    }}
-                />
             </div>
-            <div className='p-3 mt-4' style={{width: "22%"}}>
+            <div className='thirdWrap'>
                 <div className='h-50'>
                     <label htmlFor="Input" className='text-light mb-2 h5'>Input</label>
                     <textarea type="text" id='input' className='form-control h-75' ></textarea>
                 </div>
                 <div className='h-50'>
                     <label htmlFor="Output" className='text-light mb-2 h5'>Output</label>
-                    <textarea  type="text" id='output' className='form-control h-75' ></textarea>
+                    <textarea type="text" disabled id='output' className='form-control h-75' ></textarea>
                 </div>
             </div>
         </div>

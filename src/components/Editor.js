@@ -51,11 +51,12 @@ int main()
                     theme: 'dracula',
                     autoCloseTags: true,
                     autoCloseBrackets: true,
+                    tabSize:2,
                     lineNumbers: true,
                 }
 
             );
-            editorRef.current.setValue(ctemp);
+            editorRef.current.setValue("//Please select a language to load template.");
             let option = document.getElementById("specificSizeSelect");
             let val = "default";
             option.addEventListener("change", (e) => {
@@ -112,15 +113,17 @@ int main()
                     input: input.value,
                     lang: option.value
                 }
-                const outData = await fetch("http://localhost:5000/compile", {
+                console.log(JSON.stringify(code));
+                const outData = await fetch("http://localhost:8000/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(code)
                 })
-                let d=await outData.json();
-                output.value = d.otput;
+                let d= await outData.json();
+                console.log(d);
+                output.value = d.output;
             })
             editorRef.current.on('change', (instance, changes) => {
                 const { origin } = changes;

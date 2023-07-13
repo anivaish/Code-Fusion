@@ -94,9 +94,17 @@ footer a:hover {
   flex-direction: row;
   /* grid-template-columns: 230px 1fr; */
 }
-
-.editorWrap{
-  width: 70%;
+.secWrap{
+  display: flex;
+  flex-direction: row;
+}
+.thirdWrap{
+  width: 22%;
+  margin-top: 3rem;
+  padding: 1rem;
+}
+.editorWrap {
+  width: 998px;
 }
 
 .aside {
@@ -106,6 +114,7 @@ footer a:hover {
   display: flex;
   flex-direction: column;
 }
+
 .asideInner {
   flex: 1;
 }
@@ -123,6 +132,7 @@ footer a:hover {
   flex-direction: column;
   font-weight: bold;
 }
+
 .userName {
   margin-top: 10px;
 }
@@ -140,9 +150,30 @@ footer a:hover {
   width: 100%;
   margin-top: 20px;
 }
+
 .CodeMirror {
   min-height: calc(100vh - 60px);
   font-size: 15px;
   line-height: 1.6;
   padding-top: 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .editorWrap {
+    width: 100%;
+  }
+  .mainWrap {
+    flex-direction: column;
+  }
+  .thirdWrap{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .CodeMirror {
+    min-height: 100vh;
+  }
 }

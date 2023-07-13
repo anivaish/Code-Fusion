@@ -5,7 +5,7 @@ const cors = require('cors');
 const http = require('http');
 const path = require('path');
 const bodyP = require('body-parser');
-var compiler = require('compilex');
+var compiler = require('./compilex');
 const { Server } = require('socket.io');
 const ACTIONS = require('./src/Actions');
 
@@ -22,61 +22,96 @@ const io = new Server(server);
 var options = { stats: true }; //prints stats on console 
 compiler.init(options);
 
-app.use(bodyP.json());
-app.use("node_modules/codemirror", express.static("C:/Users/Aniruddh Vaish/Desktop/Project-CodeFusion/codefusion/node_modules/codemirror"));
 
-app.get("/", function (req, res) {
-    res.sendFile("C:/Users/Aniruddh Vaish/Desktop/Project-CodeFusion/codefusion/node_modules/codemirror")
-})
+app.use(bodyP.json());
+app.use("node_modules/codemirror", express.static("/node_modules/codemirror"));
+
 
 app.post("/compile", function (req, res) {
     let code = req.body.code;
     let input = req.body.input;
     let lang = req.body.lang;
     try {
-
         if (lang === "C" || lang === "Cpp") {
-            var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
-            compiler.compileCPPWithInput(envData, code, input, function (data) {
-                if (data.output) {
-                    res.send(data);
-                }
-                else {
-                    res.send("Error, Please check your program.");
-                }
-            });
+            if (input) {
+                var envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } }; // (uses g++ command to compile )
+                compiler.compileCPPWithInput(envData, code, input, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: data.error });
+                    }
+                });
+            }
+            else {
+                var envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } }; // (uses g++ command to compile )
+                compiler.compileCPP(envData, code, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: data.error });
+                    }
+                });
+            }
         }
         else if (lang === "Java") {
-            var envData = { OS: "windows" }; // (Support for Linux in Next version)
-            compiler.compileJavaWithInput(envData, code, input, function (data) {
-                if (data.output) {
-                    res.send(data);
-                }
-                else {
-                    res.send("Error, Please check your program.");
-                }
-            });
+            if (input) {
+                var envData = { OS: "windows" };
+                compiler.compileJavaWithInput(envData, code, input, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: data.error });
+                    }
+                });
+            }
+            else {
+                var envData = { OS: "windows" };
+                compiler.compileJavaWithInput(envData, code, input, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: data.error });
+                    }
+                });
+            }
         }
         else if (lang === "Python") {
-            var envData = { OS: "windows" };
-            compiler.compilePython(envData, code, function (data) {
-                if (data.output) {
-                    res.send(data);
-                }
-                else {
-                    res.send("Error, Please check your program.");
-                }
-            });
+            if (input) {
+                var envData = { OS: "windows" };
+                compiler.compilePythonWithInput(envData, code, input, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: data.error });
+                    }
+                });
+            }
+            else {
+                var envData = { OS: "windows" };
+                compiler.compilePython(envData, code, function (data) {
+                    if (data.output) {
+                        res.send(data);
+                    }
+                    else {
+                        res.send({ output: data.error });
+                    }
+                });
+            }
         }
 
-    } catch (error) {
+    } catch (e) {
         console.log("Error Detected");
     }
 })
 
 app.use(express.static('build'));
 app.use((req, res, next) => {
-    console.log(res);
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
@@ -95,6 +130,9 @@ function getAllConnectedClients(roomId) {
 
 io.on('connection', (socket) => {
     console.log('socket connected', socket.id);
+    compiler.flush(function(){
+        return;
+    });
 
     socket.on(ACTIONS.JOIN, ({ roomId, username }) => {
         userSocketMap[socket.id] = username;
@@ -130,5 +168,5 @@ io.on('connection', (socket) => {
     });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
