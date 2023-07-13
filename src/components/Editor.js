@@ -15,6 +15,7 @@ import ACTIONS from '../Actions';
 
 const Editor = ({ socketRef, roomId, onCodeChange }) => {
     const editorRef = useRef(null);
+
     const ctemp = `#include <stdio.h>
 
 int main()
@@ -51,7 +52,7 @@ int main()
                     theme: 'dracula',
                     autoCloseTags: true,
                     autoCloseBrackets: true,
-                    tabSize:2,
+                    tabSize: 2,
                     lineNumbers: true,
                 }
 
@@ -107,23 +108,31 @@ int main()
             let input = document.getElementById("input");
             let output = document.getElementById("output");
             let run = document.getElementById("run");
-            run.addEventListener("click", async function(){
+            run.addEventListener("click", async function () {
                 let code = {
                     code: editorRef.current.getValue(),
                     input: input.value,
                     lang: option.value
                 }
                 console.log(JSON.stringify(code));
-                const outData = await fetch("http://localhost:8000/compile", {
+                const outData = await fetch("https://code-fusion-ani.onrender.com/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(code)
                 })
-                let d= await outData.json();
+                let d = await outData.json();
                 console.log(d);
                 output.value = d.output;
+            })
+            const bars = document.getElementById("bars");
+            const aside = document.getElementById("aside");
+            bars.addEventListener("click", () => {
+                if (aside.style.display === "none")
+                    aside.style.display = "block";
+                else
+                    aside.style.display = "none";
             })
             editorRef.current.on('change', (instance, changes) => {
                 const { origin } = changes;

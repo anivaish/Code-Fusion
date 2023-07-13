@@ -66,8 +66,23 @@ footer a {
   margin-left: auto;
 }
 
+.runBtn {
+  border: none;
+  padding: 7px;
+  color: #000;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #4aed88;
+  width: 100px;
+  margin-left: auto;
+  transition: all 0.3s ease-in-out;
+}
+
 .joinBtnn:hover,
-.leaveBtnn:hover {
+.leaveBtnn:hover,
+.runBtn:hover {
   background: #2b824c;
 }
 
@@ -94,17 +109,21 @@ footer a:hover {
   flex-direction: row;
   /* grid-template-columns: 230px 1fr; */
 }
-.secWrap{
+
+.secWrap {
   display: flex;
+  width: 80%;
   flex-direction: row;
 }
-.thirdWrap{
+
+.thirdWrap {
   width: 22%;
   margin-top: 3rem;
   padding: 1rem;
 }
+
 .editorWrap {
-  width: 998px;
+  width: 100%;
 }
 
 .aside {
@@ -151,6 +170,14 @@ footer a:hover {
   margin-top: 20px;
 }
 
+.topLine {
+  justify-content: space-between;
+}
+
+.theme {
+  margin-left: 37%;
+}
+
 .CodeMirror {
   min-height: calc(100vh - 60px);
   font-size: 15px;
@@ -158,22 +185,42 @@ footer a:hover {
   padding-top: 20px;
 }
 
-@media only screen and (max-width: 1200px) {
-  .editorWrap {
-    width: 100%;
-  }
+#bars {
+  display: none;
+}
+
+@media only screen and (max-width: 800px) {
   .mainWrap {
     flex-direction: column;
   }
-  .thirdWrap{
+
+  .secWrap {
+    width: 100%;
+  }
+
+  .thirdWrap {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 0;
+    margin: 1px;
   }
-}
-@media only screen and (max-width: 750px) {
-  .CodeMirror {
-    min-height: 100vh;
+
+  .aside {
+    display: none;
+  }
+
+  .topLine {
+    justify-content: flex-end;
+  }
+
+  #bars {
+    display: block;
+    position: absolute;
+    left: 4%;
+    top: 20px;
+  }
+
+  .theme {
+    margin: 0%
   }
 }

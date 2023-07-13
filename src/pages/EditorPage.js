@@ -95,7 +95,7 @@ const EditorPage = () => {
     return (
         <div className="mainWrap">
             <div className='secWrap'>
-                <div className="aside" >
+                <div className="aside" id='aside'>
                     <div className="asideInner">
                         <div className="logo">
                             <img
@@ -122,7 +122,8 @@ const EditorPage = () => {
                     </button>
                 </div>
                 <div className="editorWrap">
-                    <div className='d-flex justify-content-between m-2'>
+                    <div className='topLine d-flex flex-row m-2'>
+                    <div id='bars'><i className="fa-solid fa-bars" style={{color: "#ffffff"}}></i></div>
                         <div className="col-sm-3 w-25" >
                             <label className="visually-hidden" htmlFor="specificSizeSelect">Preference</label>
                             <select className="form-select" id="specificSizeSelect">
@@ -133,7 +134,7 @@ const EditorPage = () => {
                                 <option value="Python">Python3</option>
                             </select>
                         </div>
-                        <div className="col-sm-2 w-25" style={{ marginLeft: "37%" }}>
+                        <div className="col-sm-2 w-25 theme">
                             <label className="visually-hidden" htmlFor="specificThemeSelect">Preference</label>
                             <select className="form-select" id="specificThemeSelect">
                                 <option >Choose Theme</option>
@@ -144,7 +145,7 @@ const EditorPage = () => {
                             </select>
                         </div>
                         <div>
-                            <button type="button" id='run' className='btn btn-success'>Run Code</button>
+                            <button type="button" id='run' className='btn btn-success runBtn'>Run Code</button>
                         </div>
                     </div>
                     <Editor
@@ -159,11 +160,11 @@ const EditorPage = () => {
             <div className='thirdWrap'>
                 <div className='h-50'>
                     <label htmlFor="Input" className='text-light mb-2 h5'>Input</label>
-                    <textarea type="text" id='input' className='form-control h-75' ></textarea>
+                    <textarea type="text" id='input' className='form-control h-75 p-3' ></textarea>
                 </div>
                 <div className='h-50'>
                     <label htmlFor="Output" className='text-light mb-2 h5'>Output</label>
-                    <textarea type="text" disabled id='output' className='form-control h-75' ></textarea>
+                    <textarea type="text" disabled id='output' className='form-control h-75 p-3' ></textarea>
                 </div>
             </div>
         </div>
