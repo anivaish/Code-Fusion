@@ -27,7 +27,7 @@
   "scripts": {
     "start:front": "react-scripts start",
     "start": "npm run prod",
-    "build": "react-scripts build",
+    "build": "npm install && react-scripts build",
     "dev": "nodemon server.js",
     "prod": "node server.js",
     "test": "react-scripts test",
