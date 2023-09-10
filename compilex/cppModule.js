@@ -15,6 +15,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 	
 	//create temp0
 	fs.writeFile( path  +  filename +'.cpp' , code  , function(err ){
+		console.log(code);
 		if(exports.stats)
 		{
 			if(err)
@@ -44,7 +45,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 							var progNotFinished=true;
 							var tempcommand = "cd temp & "+ filename +".exe";
 							exec( tempcommand , function ( error , stdout , stderr ){
-								console.log(error);
+								console.log(error);//here is the ERROR MAN!!!!!!!
 								if(error)
 								{
 
