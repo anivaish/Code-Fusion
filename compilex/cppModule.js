@@ -29,7 +29,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 					//compile c code
 					commmand = 'g++ ' + path + filename +'.cpp -o '+path + filename +'.exe' ;
 					exec(commmand , function ( error , stdout , stderr ){
-						console.log(error);
+						
 						if(error)
 						{
 							if(exports.stats)
@@ -44,6 +44,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 							var progNotFinished=true;
 							var tempcommand = "cd temp & "+ filename ;
 							exec( tempcommand , function ( error , stdout , stderr ){
+								console.log(error);
 								if(error)
 								{
 
