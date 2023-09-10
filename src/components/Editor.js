@@ -115,7 +115,7 @@ int main()
                     lang: option.value
                 }
                 console.log(JSON.stringify(code));
-                const outData = await fetch("https://code-fusion-ani.onrender.com/compile", {
+                const outData = await fetch("http://localhost:8000/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
