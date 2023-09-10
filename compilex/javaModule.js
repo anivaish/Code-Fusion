@@ -11,7 +11,7 @@ exports.compileJava = function (envData , code , fn ){
 	//creating source file
     var dirname = cuid.slug();
 	path = './temp/'+dirname;
-
+	console.log(envData);
 	fs.mkdir(path , 0777 , function(err){	
 		if(err && exports.stats)
 		console.log(err.toString().red);
@@ -41,6 +41,7 @@ exports.compileJava = function (envData , code , fn ){
 							console.log("INFO: ".green + "compiled a java file");
 							var command = "cd "+path+" & java Main";
 							exec(command , function( error , stdout , stderr ){
+								console.log(error);
 								if(error)
 								{
 												
