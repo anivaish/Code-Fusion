@@ -8,10 +8,10 @@ var colors = require('colors');
 exports.stats = false ;
 
 exports.compileJava = function (envData , code , fn ){
+	console.log(envData);
 	//creating source file
     var dirname = cuid.slug();
 	path = './temp/'+dirname;
-	console.log(envData);
 	fs.mkdir(path , 0777 , function(err){	
 		if(err && exports.stats)
 		console.log(err.toString().red);
