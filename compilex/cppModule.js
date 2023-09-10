@@ -30,7 +30,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 					//compile c code
 					commmand = 'g++ ' + path + filename +'.cpp -o '+path + filename +'.exe' ;
 					exec(commmand , function ( error , stdout , stderr ){
-						
+						console.log(commmand);
 						if(error)
 						{
 							if(exports.stats)
