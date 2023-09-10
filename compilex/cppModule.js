@@ -47,7 +47,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 						else
 						{
 							var progNotFinished=true;
-							var tempcommand = path+ filename;
+							var tempcommand = path+ filename+ ".exe";
 							execFile( tempcommand , function ( error , stdout , stderr ){
 								console.log(error);//here is the ERROR MAN!!!!!!!
 								if(error)
