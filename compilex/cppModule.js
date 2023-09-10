@@ -1,4 +1,5 @@
 var exec  = require('child_process').exec;
+var {execFile}  = require('child_process');
 var fs = require('fs');
 var cuid = require('cuid');
 var colors = require('colors');
@@ -46,8 +47,8 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 						else
 						{
 							var progNotFinished=true;
-							var tempcommand = "cd temp & "+ filename ;
-							exec( tempcommand , function ( error , stdout , stderr ){
+							var tempcommand = path+ filename;
+							execFile( tempcommand , function ( error , stdout , stderr ){
 								console.log(error);//here is the ERROR MAN!!!!!!!
 								if(error)
 								{
