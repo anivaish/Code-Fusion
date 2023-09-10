@@ -6,8 +6,6 @@ var colors = require('colors');
 
 
 exports.stats = false ;
-
-
 exports.compileCPP = function ( envData ,  code , fn ) {
 	//creating source file
 	var filename = cuid.slug();
@@ -15,8 +13,8 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 
 	
 	//create temp0
-	// edited by me
-	fs.writeFileSync(path  +  filename +'.cpp' , code);
+	// edited by me line no. 17
+	// fs.writeFileSync(path  +  filename +'.cpp' , code);
 	
 	fs.writeFile( path  +  filename +'.cpp' , code  , function(err ){
 		console.log(code);
