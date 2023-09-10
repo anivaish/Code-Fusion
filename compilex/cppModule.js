@@ -17,7 +17,6 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 	// fs.writeFileSync(path  +  filename +'.cpp' , code);
 	
 	fs.writeFile( path  +  filename +'.cpp' , code  , function(err ){
-		console.log(code);
 		if(exports.stats)
 		{
 			if(err)
@@ -32,7 +31,6 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 					//compile c code
 					commmand = 'g++ ' + path + filename +'.cpp -o '+path + filename +'.exe' ;
 					exec(commmand , function ( error , stdout , stderr ){
-						console.log(commmand);
 						if(error)
 						{
 							if(exports.stats)
@@ -206,9 +204,9 @@ exports.compileCPPWithInput = function ( envData , code , input ,  fn ) {
 									}
 								});
 								var progNotFinished=true;
-								var tempcommand = "cd temp & " + filename ;
+								var tempcommand = path+ filename+ ".exe" ;
 
-								exec( tempcommand + '<' + inputfile , function( error , stdout , stderr ){
+								execFile( tempcommand + '<' + inputfile , function( error , stdout , stderr ){
 									if(error)
 									{
 										if(error.toString().indexOf('Error: stdout maxBuffer exceeded.') != -1)
