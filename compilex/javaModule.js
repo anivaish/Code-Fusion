@@ -1,4 +1,5 @@
 var exec  = require('child_process').exec;
+var execFile= require('child_process');
 var fs = require('fs');
 var cuid = require('cuid');
 var colors = require('colors');
@@ -27,6 +28,7 @@ exports.compileJava = function (envData , code , fn ){
 			    	if(envData.OS === "windows")
 						var command = "cd "+path+ " & " + " javac Main.java";
 					exec(command , function( error , stdout , stderr ){
+						console.log(error);
 						if(error)
 						{
 							if(exports.stats)							
