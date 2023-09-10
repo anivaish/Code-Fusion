@@ -12,7 +12,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 	var filename = cuid.slug();
 	path = './temp/';
 
-	console.log(envData);
+	
 	//create temp0
 	fs.writeFile( path  +  filename +'.cpp' , code  , function(err ){
 		if(exports.stats)
@@ -29,6 +29,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 					//compile c code
 					commmand = 'g++ ' + path + filename +'.cpp -o '+path + filename +'.exe' ;
 					exec(commmand , function ( error , stdout , stderr ){
+						console.log(error);
 						if(error)
 						{
 							if(exports.stats)
