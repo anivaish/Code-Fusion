@@ -12,7 +12,7 @@ exports.compileCPP = function ( envData ,  code , fn ) {
 	var filename = cuid.slug();
 	path = './temp/';
 
-
+	console.log(exports.stats);
 	//create temp0
 	fs.writeFile( path  +  filename +'.cpp' , code  , function(err ){
 		if(exports.stats)
